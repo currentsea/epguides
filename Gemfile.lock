@@ -3,6 +3,7 @@ GEM
   specs:
     ansi (1.4.3)
     minitest (4.6.2)
+    nokogiri (1.5.6)
     turn (0.9.6)
       ansi
 
@@ -11,4 +12,5 @@ PLATFORMS
 
 DEPENDENCIES
   minitest
+  nokogiri
   turn

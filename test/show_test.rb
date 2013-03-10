@@ -12,4 +12,8 @@ class ShowTest < MiniTest::Unit::TestCase
   def test_provides_url
     assert_equal 'http://epguides.com/DailyShow/', @show.url
   end
+
+  def test_name
+    assert_equal 'The Daily Show', @show.name
+  end
 end

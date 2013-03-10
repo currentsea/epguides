@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'nokogiri'
+
 class Show
   attr_reader :slug
   
@@ -7,5 +10,15 @@ class Show
 
   def url
     "http://epguides.com/#{@slug}/"
+  end
+
+  def name
+    doc.css('//h1').text
+  end
+
+  private
+
+  def doc
+    @doc ||= Nokogiri::HTML(open(url))
   end
 end
