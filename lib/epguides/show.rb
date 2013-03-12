@@ -1,7 +1,5 @@
 # encoding: UTF-8
 require 'open-uri'
-require 'nokogiri'
-require_relative './season.rb'
 
 module Epguides
   class Show
