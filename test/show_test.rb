@@ -1,6 +1,8 @@
-require_relative '../lib/show.rb'
+require 'epguides'
 
 class ShowTest < MiniTest::Unit::TestCase
+  include Epguides
+
   def setup
     @show = Show.new('DailyShow')
   end
