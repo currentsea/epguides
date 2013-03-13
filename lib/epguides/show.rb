@@ -20,10 +20,6 @@ module Epguides
       end
     end
 
-    def url
-      "http://epguides.com/#{@slug}/"
-    end
-
     private
 
     def doc
@@ -32,6 +28,10 @@ module Epguides
 
     def list
       doc.xpath('//div[@id = "eplist"]').text
+    end
+
+    def url
+      "http://epguides.com/#{@slug}/"
     end
   end
 end

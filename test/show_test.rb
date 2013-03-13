@@ -12,7 +12,7 @@ class ShowTest < MiniTest::Unit::TestCase
   end
 
   def test_provides_url
-    assert_equal 'http://epguides.com/DailyShow/', @show.url
+    assert_equal 'http://epguides.com/DailyShow/', @show.send(:url)
   end
 
   def test_name
