@@ -18,4 +18,11 @@ class ShowTest < MiniTest::Unit::TestCase
   def test_name
     assert_equal 'The Daily Show', @show.name
   end
+
+  def test_episodes
+    episode = @show.episodes.first
+    assert_equal '01', episode.number
+    assert_equal Date.new(1996, 7, 22), episode.air_date
+    assert_equal 'Premiere Episode', episode.title
+  end
 end

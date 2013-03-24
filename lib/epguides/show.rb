@@ -5,6 +5,18 @@ module Epguides
   class Show
     attr_reader :slug
 
+    def episodes
+      regx = /(\d+)\s+(\d+)-(\d+)\s+(\d+\/\w{3}\/\d{2})\s+(.+\Z)/
+      parse_table.inject([]) do |eps, line|
+        if m = regx.match(line)
+          episode = Episode.new(m[2], m[3], m[4], m[5])
+          eps + [episode]
+        else
+          eps
+        end
+      end
+    end
+
     def initialize(slug)
       @slug = slug
     end
@@ -28,6 +40,11 @@ module Epguides
 
     def list
       doc.xpath('//div[@id = "eplist"]').text
+    end
+
+    def parse_table
+      titles = doc.xpath('//div[@id = "eplist"]//a').text
+      doc.xpath('//div[@id = "eplist"]').text.split("\r\n")
     end
 
     def url
