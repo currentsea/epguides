@@ -5,9 +5,13 @@ module Epguides
   class Show
     attr_reader :slug
 
+    def initialize(slug)
+      @slug = slug
+    end
+
     def episodes
       regx = /(\d+)\s+(\d+)-(\d+)\s+(\d+\/\w{3}\/\d{2})\s+(.+\Z)/
-      parse_table.inject([]) do |eps, line|
+      @episodes ||= parse_table.inject([]) do |eps, line|
         if m = regx.match(line)
           episode = Episode.new(m[2], m[3], m[4], m[5])
           eps + [episode]
@@ -15,10 +19,6 @@ module Epguides
           eps
         end
       end
-    end
-
-    def initialize(slug)
-      @slug = slug
     end
 
     def name
