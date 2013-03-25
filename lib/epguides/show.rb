@@ -11,9 +11,8 @@ module Epguides
     end
 
     def episodes
-      regx = /(\d+)\s+(\d+)-(\d+)\s+(\d+\/\w{3}\/\d{2})\s+(.+\Z)/
       @episodes ||= parse_table.inject([]) do |eps, line|
-        if m = regx.match(line)
+        if m = Episode::REGX.match(line)
           episode = Episode.new(m[2], m[3], m[4], m[5])
           eps + [episode]
         else

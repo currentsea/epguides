@@ -1,5 +1,7 @@
 module Epguides
   class Episode
+    REGX = /(\d+)\s+(\d+)-(\d+)\s+(\d+\/\w{3}\/\d{2})\s+(.+\Z)/
+
     attr_reader :season, :number, :air_date, :title
 
     def initialize(season, number, air_date, title)
