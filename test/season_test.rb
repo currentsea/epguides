@@ -4,7 +4,7 @@ class SeasonTest < MiniTest::Unit::TestCase
   include Epguides
 
   def setup
-    @show = Show.new('DailyShow')
+    @show = Show.new(slug: 'DailyShow')
   end
 
   def test_show_is_set

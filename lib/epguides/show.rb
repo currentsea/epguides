@@ -3,10 +3,11 @@ require 'open-uri'
 
 module Epguides
   class Show
-    attr_reader :slug
+    attr_reader :slug, :url
 
-    def initialize(slug)
-      @slug = slug
+    def initialize(args={})
+      @slug = args[:slug]
+      @url  = args[:url]
     end
 
     def episodes
@@ -32,6 +33,17 @@ module Epguides
       end
     end
 
+    def url
+      @url ||= "http://epguides.com/#{@slug}/"
+    end
+
+    def self.search(q)
+      search_url = 'http://ajax.googleapis.com/ajax/services/search/web' +
+        '?v=1.0&q=allintitle: site:epguides.com '
+      results = JSON.parse RestClient.get(URI.escape(search_url + q))
+      new url: results['responseData']['results'].first['url']
+    end
+
     private
 
     def doc
@@ -45,10 +57,6 @@ module Epguides
     def parse_table
       titles = doc.xpath('//div[@id = "eplist"]//a').text
       doc.xpath('//div[@id = "eplist"]').text.split("\r\n")
-    end
-
-    def url
-      "http://epguides.com/#{@slug}/"
     end
   end
 end

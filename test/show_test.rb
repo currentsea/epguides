@@ -4,7 +4,7 @@ class ShowTest < MiniTest::Unit::TestCase
   include Epguides
 
   def setup
-    @show = Show.new('DailyShow')
+    @show = Show.new(slug: 'DailyShow')
   end
   
   def test_slug_is_set_and_readable
@@ -12,7 +12,7 @@ class ShowTest < MiniTest::Unit::TestCase
   end
 
   def test_provides_url
-    assert_equal 'http://epguides.com/DailyShow/', @show.send(:url)
+    assert_equal 'http://epguides.com/DailyShow/', @show.url
   end
 
   def test_name
@@ -24,5 +24,12 @@ class ShowTest < MiniTest::Unit::TestCase
     assert_equal '01', episode.number
     assert_equal Date.new(1996, 7, 22), episode.air_date
     assert_equal 'Premiere Episode', episode.title
+  end
+
+  def test_search_shows
+    @show = Show.search('The Daily Show')
+    @show2 = Show.search('Archer')
+    assert_equal 'http://epguides.com/DailyShow/', @show.url
+    assert_equal 'http://epguides.com/Archer/', @show2.url
   end
 end
