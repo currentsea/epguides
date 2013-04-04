@@ -6,5 +6,9 @@ module Epguides
       @episodes = episodes
       @season = season
     end
+
+    def episode(n)
+      @episodes.find {|ep| ep.number.to_i == n}
+    end
   end
 end
