@@ -11,14 +11,14 @@ module Epguides
     end
 
     def episodes
-      @episodes ||= parse_table.inject([]) do |eps, line|
-        if m = Episode::REGX.match(line)
-          episode = Episode.new(m[2], m[3], m[4], m[5])
-          eps + [episode]
-        else
-          eps
+      return @episodes if @episodes
+      @episodes = EpisodeList.new
+      parse_table.each do |row|
+        if m = Episode::REGX.match(row)
+          @episodes << Episode.new(m[2], m[3], m[4], m[5], m[6])
         end
       end
+      @episodes
     end
 
     def name
