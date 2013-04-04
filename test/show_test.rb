@@ -32,4 +32,10 @@ class ShowTest < MiniTest::Unit::TestCase
     assert_equal 'http://epguides.com/DailyShow/', @show.url
     assert_equal 'http://epguides.com/Archer/', @show2.url
   end
+
+  def test_get_season_by_number
+    season = @show.season(2)
+    assert_equal '2', season.season
+    assert_equal 3, season.episodes.size
+  end
 end

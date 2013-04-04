@@ -1,9 +1,9 @@
 module Epguides
   class Season
-    attr_reader :show, :season
+    attr_reader :episodes, :season
   
-    def initialize(show, season)
-      @show = show
+    def initialize(season, episodes=[])
+      @episodes = episodes
       @season = season
     end
   end

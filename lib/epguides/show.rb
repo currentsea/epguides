@@ -25,6 +25,10 @@ module Epguides
       doc.css('//h1').text
     end
 
+    def season(n)
+      Season.new(n.to_s, episodes.find_by_season(n))
+    end
+
     def seasons
       pattern = Regexp.new("•\\s+Season\\s+(\\d+)")
       list.scan(pattern).map do |s|
