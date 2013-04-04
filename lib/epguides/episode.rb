@@ -1,6 +1,6 @@
 module Epguides
   class Episode
-    REGX = /(\d+)\s+(\d+)-(\d+)\s+(.*)\s+(\d+\/\w{3}\/\d{2})\s+(.+\Z)/
+    REGX = /(\d+)\s+(\d+)-(\d+)\s+(.*)\s+(\d*\/*\w{3}\/\d{2})\s+(.+\Z)/
 
     attr_reader :season, :number, :air_date, :title
 
@@ -15,7 +15,11 @@ module Epguides
     private
 
     def parse_date(date)
-      DateTime.strptime(date, "%d/%b/%y").to_date
+      if /\d+\/\w{3}\/\d{2}/.match(date)
+        DateTime.strptime(date, "%d/%b/%y").to_date
+      else
+        ''
+      end
     end
   end
 end
