@@ -1,5 +1,8 @@
 # encoding: UTF-8
+require 'json'
+require 'nokogiri'
 require 'open-uri'
+require 'rest-client'
 
 module Epguides
   class Show
