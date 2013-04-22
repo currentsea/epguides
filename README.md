@@ -6,7 +6,9 @@ Epguides makes it easy to look up TV episode information from http://epguides.co
 Installation
 ------------
 
+```
 gem install epguides
+```
 
 Usage
 -----
